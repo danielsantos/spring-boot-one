@@ -14,12 +14,16 @@ public class HomeController {
 	private UsuarioRepository usuarioRepository;
 
 	@GetMapping("/")
-	public ModelAndView index() {
+	public ModelAndView index(String msg) {
 		
 		ModelAndView mv = new ModelAndView("index");
 		
 		mv.addObject("listaUsuarios", usuarioRepository.findAll());
 		mv.addObject("usuario", new Usuario());
+		
+		if (msg != null) {
+			mv.addObject("msgSucesso", msg);
+		}
 		
 		return mv;
 		
@@ -40,7 +44,7 @@ public class HomeController {
 		
 		usuarioRepository.save(usuario);
 		
-		return index();
+		return index("Usuário cadastro com sucesso!");
 		
 	}
 	
@@ -52,7 +56,7 @@ public class HomeController {
 		
 		usuarioRepository.delete(usuario);
 		
-		return index();
+		return index("Usuário excluído com sucesso!");
 		
 	}
 	
@@ -73,7 +77,7 @@ public class HomeController {
 		
 		usuarioRepository.save(usuario);
 		
-		return index();
+		return index("Usuário alterado com sucesso!");
 		
 	}
 	

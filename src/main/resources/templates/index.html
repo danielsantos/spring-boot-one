@@ -1,10 +1,18 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 	<title>Home</title>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css"/>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js"></script>
 </head>
 <body>
 
-	<h2>Lista de Usuarios</h2>
+	<div class="alert alert-success" th:if="${msgSucesso ne null}">
+		<span th:text="${msgSucesso}"></span>
+	</div>
+
+	<h2>Lista de Usu&uacute;rios</h2>
+	
+	<br/>
 	
 	<table border="1" style="width: 30%;">
 		<thead>
