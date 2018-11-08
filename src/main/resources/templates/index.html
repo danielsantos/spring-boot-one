@@ -20,6 +20,8 @@
             	<td th:text="${usuario.id}"></td>
                 <td th:text="${usuario.nome}"></td>
                 <td>
+                	<a th:href="@{ '/alterar/' + ${usuario.id} }">Alterar</a>
+                	|
                 	<a th:href="@{ '/excluir/' + ${usuario.id} }">Excluir</a>
 				</td>
             </tr>

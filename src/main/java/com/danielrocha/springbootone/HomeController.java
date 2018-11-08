@@ -56,4 +56,25 @@ public class HomeController {
 		
 	}
 	
+	@GetMapping("/alterar/{id}")
+	public ModelAndView alterar(@PathVariable("id") Long id) {
+
+		Usuario usuario = usuarioRepository.getOne(id);
+		
+		ModelAndView mv = new ModelAndView("alteracao");
+		mv.addObject("usuario", usuario);
+		
+		return mv;
+		
+	}
+	
+	@PostMapping("/alterar")
+	public ModelAndView alterar(Usuario usuario) {
+		
+		usuarioRepository.save(usuario);
+		
+		return index();
+		
+	}
+	
 }

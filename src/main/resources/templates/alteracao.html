@@ -1,0 +1,20 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<title>Home</title>
+</head>
+<body>
+
+	<h2>Altera&ccedil;&atilde;o de Usuarios</h2>
+	
+	<form th:object="${usuario}" th:action="@{/alterar}" method="POST">
+	
+		<input type="hidden" th:field="*{id}"/>
+	
+		Nome: <input type="text" th:field="*{nome}"/>
+		
+		<button type="submit">Alterar</button>
+		
+	</form>
+	
+</body>
+</html>
