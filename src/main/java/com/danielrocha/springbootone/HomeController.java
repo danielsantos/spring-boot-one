@@ -24,6 +24,16 @@ public class HomeController {
 		
 	}
 	
+	@GetMapping("/cadastro")
+	public ModelAndView cadastro() {
+		
+		ModelAndView mv = new ModelAndView("cadastro");
+		mv.addObject("usuario", new Usuario());
+		
+		return mv;
+		
+	}
+	
 	@PostMapping("/save")
 	public ModelAndView save(Usuario usuario) {
 		

@@ -1,0 +1,18 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<title>Home</title>
+</head>
+<body>
+
+	<h2>Cadatro de Usuarios</h2>
+	
+	<form th:object="${usuario}" th:action="@{/save}" method="POST">
+	
+		Nome: <input type="text" th:field="*{nome}"/>
+		
+		<button type="submit">Cadastrar</button>
+		
+	</form>
+	
+</body>
+</html>
