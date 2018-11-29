@@ -10,8 +10,18 @@
 	
 		Nome: <input type="text" th:field="*{nome}"/>
 		
-		<button type="submit">Cadastrar</button>
+		<br/><br/>
 		
+		Departamento: 
+		<select th:field="*{departamento.id}">
+			<option th:text="Selecione" th:value="0">
+    		<option th:each="dept : ${listaDepartamentos}" th:text="${dept.nome}" th:value="${dept.id}">
+		</select>
+		
+		<br/><br/>
+		
+		<button type="submit">Cadastrar</button>
+				
 	</form>
 	
 </body>

@@ -1,5 +1,7 @@
 package com.danielrocha.springbootone;
 
+import java.util.Date;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,13 +14,17 @@ public class HomeController {
 	
 	@Autowired
 	private UsuarioRepository usuarioRepository;
+	
+	@Autowired
+	private DepartamentoRepository departamentoRepository;
+
 
 	@GetMapping("/")
 	public ModelAndView index(String msg) {
 		
 		ModelAndView mv = new ModelAndView("index");
 		
-		mv.addObject("listaUsuarios", usuarioRepository.findAll());
+		mv.addObject("listaUsuarios", usuarioRepository.buscarAtivos());
 		mv.addObject("usuario", new Usuario());
 		
 		if (msg != null) {
@@ -34,6 +40,7 @@ public class HomeController {
 		
 		ModelAndView mv = new ModelAndView("cadastro");
 		mv.addObject("usuario", new Usuario());
+		mv.addObject("listaDepartamentos", departamentoRepository.findAll());
 		
 		return mv;
 		
@@ -42,6 +49,7 @@ public class HomeController {
 	@PostMapping("/save")
 	public ModelAndView save(Usuario usuario) {
 		
+		usuario.setDataCadastro(new Date());
 		usuarioRepository.save(usuario);
 		
 		return index("Usuário cadastro com sucesso!");
@@ -51,10 +59,7 @@ public class HomeController {
 	@GetMapping("/excluir/{id}")
 	public ModelAndView excluir(@PathVariable("id") Long id) {
 		
-		Usuario usuario = new Usuario();
-		usuario.setId(id);
-		
-		usuarioRepository.delete(usuario);
+		usuarioRepository.excluirLogicamente(id);
 		
 		return index("Usuário excluído com sucesso!");
 		
@@ -67,6 +72,7 @@ public class HomeController {
 		
 		ModelAndView mv = new ModelAndView("alteracao");
 		mv.addObject("usuario", usuario);
+		mv.addObject("listaDepartamentos", departamentoRepository.findAll());
 		
 		return mv;
 		
@@ -74,6 +80,9 @@ public class HomeController {
 	
 	@PostMapping("/alterar")
 	public ModelAndView alterar(Usuario usuario) {
+		
+		Usuario usuarioBanco = usuarioRepository.getOne(usuario.getId());
+		usuario.setDataCadastro(usuarioBanco.getDataCadastro());
 		
 		usuarioRepository.save(usuario);
 		

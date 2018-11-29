@@ -14,11 +14,12 @@
 	
 	<br/>
 	
-	<table border="1" style="width: 30%;">
+	<table border="1" style="width: 50%;">
 		<thead>
         	<tr>
             	<th>Codigo</th>
                 <th>Nome</th>
+                <th>Data de Casdastro</th>
                 <th>A&ccedil;&otilde;es</th>
             </tr>
 		</thead>
@@ -27,6 +28,7 @@
         	<tr th:each="usuario: ${listaUsuarios}">
             	<td th:text="${usuario.id}"></td>
                 <td th:text="${usuario.nome}"></td>
+                <td th:text="${#dates.format(usuario.dataCadastro, 'dd/MM/yyyy HH:mm')}"></td>
                 <td>
                 	<a th:href="@{ '/alterar/' + ${usuario.id} }">Alterar</a>
                 	|

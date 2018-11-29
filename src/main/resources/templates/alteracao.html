@@ -9,8 +9,18 @@
 	<form th:object="${usuario}" th:action="@{/alterar}" method="POST">
 	
 		<input type="hidden" th:field="*{id}"/>
-	
+		
 		Nome: <input type="text" th:field="*{nome}"/>
+		
+		<br/><br/>
+		
+		Departamento: 
+		<select th:field="*{departamento.id}">
+			<option th:text="Selecione" th:value="0">
+    		<option th:each="dept : ${listaDepartamentos}" th:text="${dept.nome}" th:value="${dept.id}">
+		</select>
+		
+		<br/><br/>
 		
 		<button type="submit">Alterar</button>
 		
